@@ -27,7 +27,7 @@ export class ValuesComponent implements OnInit {
   }
   connectSignalR() {
     const hub = new signalR.HubConnectionBuilder()
-      .withUrl('/time')
+      .withUrl('http://localhost:5000/time')
       .build();
     hub.on('send', data => {
       this.title = data;
