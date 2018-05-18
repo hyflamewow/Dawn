@@ -28,10 +28,10 @@ Sun $ curl https://raw.githubusercontent.com/github/gitignore/master/VisualStudi
 ## 加入版控
 ```
 Dawn>git init
-Dawn>git add --all
+Dawn>git add .
 Dawn>git commit -m "first commit"
 ```
-## 調整Frontend程式
+## 調整Moon程式
 修改Moon/angular.json，為了輸出到ASP.NET Core的專案。
 ```
 "outputPath": "../Sun/wwwroot",
@@ -54,8 +54,8 @@ Dawn>git commit -m "first commit"
 ```
 <base href="./">
 ```
-## 調整Backend程式
-修改Backend/Startup.cs，為了實現SPA設計。
+## 調整Sun程式
+修改Sun/Startup.cs，為了實現SPA設計。
 ```
 app.UseMvc();
 app.UseDefaultFiles();
@@ -84,4 +84,8 @@ Sun>dotnet restore
 Sun>dotnet run
 ```
 瀏覽 http://localhost:5000/
-
+## 版控
+```
+Dawn>git add .
+Dawn>git commit -m "first commit"
+```
