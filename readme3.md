@@ -1,30 +1,20 @@
-﻿using System;
-using System.Collections.Generic;
-using System.IO;
-using System.Linq;
-using System.Threading.Tasks;
-using Microsoft.AspNetCore.Builder;
-using Microsoft.AspNetCore.Hosting;
-using Microsoft.AspNetCore.Http;
-using Microsoft.AspNetCore.Mvc;
-using Microsoft.AspNetCore.Mvc.Cors.Internal;
-using Microsoft.Extensions.Configuration;
-using Microsoft.Extensions.DependencyInjection;
-using Microsoft.Extensions.Logging;
-using Microsoft.Extensions.Options;
-
-namespace Sun
-{
-    public class Startup
-    {
-        public Startup(IConfiguration configuration)
-        {
-            Configuration = configuration;
-        }
-
-        public IConfiguration Configuration { get; }
-
-        // This method gets called by the runtime. Use this method to add services to the container.
+# Dawn
+2018/05/18
+## 目標
+啟用CORS
+## 修改Moon
+values.component.ts
+```ts
+getList() {
+    this.http.get<string[]>('http://localhost:5000/api/values')
+      .subscribe(list => {
+        this.list = list;
+      });
+  }
+```
+## 修改 Sun
+Startup.cs
+```cs
         public void ConfigureServices(IServiceCollection services)
         {
             services.AddMvc();
@@ -62,5 +52,11 @@ namespace Sun
                }
            });
         }
-    }
-}
+```
+
+## 測試
+```
+Sun>dotnet run
+Moon>ng serve
+```
+瀏覽 http://localhost:4200/

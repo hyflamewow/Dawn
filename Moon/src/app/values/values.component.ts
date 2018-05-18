@@ -17,7 +17,7 @@ export class ValuesComponent implements OnInit {
   }
 
   getList() {
-    this.http.get<string[]>('api/values')
+    this.http.get<string[]>('http://localhost:5000/api/values')
       .subscribe(list => {
         this.list = list;
       });
