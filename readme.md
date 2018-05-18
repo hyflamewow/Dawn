@@ -87,5 +87,5 @@ Sun>dotnet run
 ## 版控
 ```
 Dawn>git add .
-Dawn>git commit -m "first commit"
+Dawn>git commit -m "incubator"
 ```
