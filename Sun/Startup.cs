@@ -36,6 +36,7 @@ namespace Sun
                         .AllowAnyOrigin()
                         .AllowAnyMethod()
                         .AllowAnyHeader()
+                        .AllowCredentials()
                 );
             });
             services.Configure<MvcOptions>(options =>{
