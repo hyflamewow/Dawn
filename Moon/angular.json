@@ -108,6 +108,11 @@
           "options": {
             "protractorConfig": "e2e/protractor.conf.js",
             "devServerTarget": "Moon:serve"
+          },
+          "configurations": {
+            "production": {
+              "devServerTarget": "Moon:serve:production"
+            }
           }
         },
         "lint": {

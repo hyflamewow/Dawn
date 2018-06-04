@@ -6,6 +6,8 @@ using System.Threading.Tasks;
 using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Hosting;
 using Microsoft.AspNetCore.Http;
+using Microsoft.AspNetCore.HttpsPolicy;
+using Microsoft.AspNetCore.Mvc;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Logging;
@@ -25,7 +27,7 @@ namespace Sun
         // This method gets called by the runtime. Use this method to add services to the container.
         public void ConfigureServices(IServiceCollection services)
         {
-            services.AddMvc();
+            services.AddMvc().SetCompatibilityVersion(CompatibilityVersion.Version_2_1);
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.
@@ -35,17 +37,22 @@ namespace Sun
             {
                 app.UseDeveloperExceptionPage();
             }
+            else
+            {
+                app.UseHsts();
+            }
 
+            // app.UseHttpsRedirection();
             app.UseMvc();
             app.UseDefaultFiles();
             app.UseStaticFiles();
             app.Run(async (context) =>
-           {
-               if (!Path.HasExtension(context.Request.Path.Value))
-               {
-                   await context.Response.SendFileAsync(Path.Combine(env.WebRootPath, "index.html"));
-               }
-           });
+            {
+                if (!Path.HasExtension(context.Request.Path.Value))
+                {
+                    await context.Response.SendFileAsync(Path.Combine(env.WebRootPath, "index.html"));
+                }
+            });
         }
     }
 }

@@ -1,11 +1,11 @@
 # Dawn
-2018/05/18
+2018/06/04
 ## 目標
 Angular with ASP.NET Core
 ## 環境
 1. NodeJS: v8.11.2
-1. NET Core: 2.1.200
-1. @angular/cli : v6.0.3
+1. NET Core: 2.1.300
+1. @angular/cli : v6.0.7
 ## 檢查
 1. $ node --version
 1. $ dotnet --version
@@ -18,8 +18,9 @@ Angular with ASP.NET Core
 ## 建立Moon專案
 ```
 Dawn>ng new Moon --skip-install --routing --style=scss
+Moon$ rm -rf .git
 ```
-刪除.git目錄
+
 ## 建立Sun專案
 ```
 Dawn>dotnet new webapi -o Sun
@@ -57,16 +58,29 @@ Dawn>git commit -m "first commit"
 ## 調整Sun程式
 修改Sun/Startup.cs，為了實現SPA設計。
 ```
+// app.UseHttpsRedirection();
 app.UseMvc();
 app.UseDefaultFiles();
 app.UseStaticFiles();
-app.Run( async (context) =>
+app.Run(async (context) =>
 {
     if (!Path.HasExtension(context.Request.Path.Value))
     {
-        await context.Response.SendFileAsync(Path.Combine(env.WebRootPath,"index.html"));
+        await context.Response.SendFileAsync(Path.Combine(env.WebRootPath, "index.html"));
     }
 });
+```
+修改launchSettings.json，移除HTTPS用的5001
+```
+"Sun": {
+  "commandName": "Project",
+  "launchBrowser": true,
+  "launchUrl": "api/values",
+  "applicationUrl": "http://localhost:5000",
+  "environmentVariables": {
+    "ASPNETCORE_ENVIRONMENT": "Development"
+  }
+}
 ```
 ## 修改 Sun/.gitignore
 ```
