@@ -41,6 +41,7 @@ namespace Sun
             services.Configure<MvcOptions>(options =>{
                 options.Filters.Add(new CorsAuthorizationFilterFactory("CorsPolicy"));
             });
+            services.AddSignalR();
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.
@@ -60,6 +61,9 @@ namespace Sun
             app.UseDefaultFiles();
             app.UseStaticFiles();
             app.UseCors("CorsPolicy");
+            app.UseSignalR(routes => {
+                routes.MapHub<TimeHub>("/time");
+            });
             app.Run(async (context) =>
             {
                 if (!Path.HasExtension(context.Request.Path.Value))
